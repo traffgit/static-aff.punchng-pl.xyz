@@ -1,0 +1,12 @@
+{
+  "name": "acf/pros-cons",
+  "title": "Block: Pros & Cons",
+  "description": "",
+  "category": "design",
+  "icon": "update",
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "pros-cons.php"
+  },
+  "align": "full"
+}

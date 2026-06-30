@@ -1,0 +1,200 @@
+{
+    "key": "group_69d3ae001a001",
+    "title": "[Shortcode] Link list",
+    "fields": [
+        {
+            "key": "field_69d3ae001a002",
+            "label": "Instruction",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Use shortcode <code>[link-list id=\"N\"]<\/code> in post content, where <strong>N<\/strong> is the row number below (starting from 1).\r\n\r\nExamples:\r\n<ul>\r\n<li><code>[link-list id=\"1\"]<\/code> — displays the first block<\/li>\r\n<li><code>[link-list id=\"2\"]<\/code> — displays the second block<\/li>\r\n<\/ul>\r\n\r\nEach block has its own <strong>Variant<\/strong> (pill or card) and <strong>Links<\/strong> list.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_69d3ae001a010",
+            "label": "Blocks",
+            "name": "link_list_blocks",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add block",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69d3ae001a003",
+                    "label": "Variant",
+                    "name": "variant",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "pill": "Pill (rounded)",
+                        "card": "Card (square)"
+                    },
+                    "default_value": "pill",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_69d3ae001a010"
+                },
+                {
+                    "key": "field_69d3ae001a004",
+                    "label": "Links",
+                    "name": "links",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "80",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add link",
+                    "rows_per_page": 20,
+                    "parent_repeater": "field_69d3ae001a010",
+                    "sub_fields": [
+                        {
+                            "key": "field_69d3ae001a005",
+                            "label": "Label",
+                            "name": "label",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "Casino name",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_69d3ae001a004"
+                        },
+                        {
+                            "key": "field_69d3ae001a006",
+                            "label": "URL",
+                            "name": "url",
+                            "aria-label": "",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "https:\/\/",
+                            "parent_repeater": "field_69d3ae001a004"
+                        },
+                        {
+                            "key": "field_69d3ae001a008",
+                            "label": "Open in new tab",
+                            "name": "open_in_new_tab",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "parent_repeater": "field_69d3ae001a004"
+                        },
+                        {
+                            "key": "field_69d3ae001a009",
+                            "label": "Add nofollow (rel)",
+                            "name": "add_nofollow",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "parent_repeater": "field_69d3ae001a004"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "casino"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1777995786
+}

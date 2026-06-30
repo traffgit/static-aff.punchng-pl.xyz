@@ -1,0 +1,1004 @@
+{
+  "info": {
+    "name": "TraffBand Affiliate Bridge API",
+    "description": "Колекція REST API плагіна tb-affiliate-bridge (`/wp-json/tbab/v1`). Автентифікація: заголовки `X-API-Key` (`{{token}}`) та `Authorization` (`{{authorization}}`).\n\n**Collection Variables:** `url`, `token`, `authorization`, `geoId` (типовий id терміна GEO), `casinoId`, `groupName` (напр. `casino_positions`), `itemId`, `settingSlug` — задайте під своє середовище. Детальні описи — у REST_ROUTES.md.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "url",
+      "value": "https://example.com/"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "authorization",
+      "value": ""
+    },
+    {
+      "key": "geoId",
+      "value": "918"
+    },
+    {
+      "key": "casinoId",
+      "value": "1"
+    },
+    {
+      "key": "groupName",
+      "value": "casino_positions"
+    },
+    {
+      "key": "itemId",
+      "value": "1"
+    },
+    {
+      "key": "settingSlug",
+      "value": "example-setting"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{token}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Geos",
+      "description": "Список GEO та один термін за id.",
+      "item": [
+        {
+          "name": "Geo List",
+          "description": "GET /geos — усі доступні GEO (slug, iso, casino_count, group_count тощо).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Geos] GET /geos — 200 та envelope.data (масив)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos"]
+            }
+          }
+        },
+        {
+          "name": "Get Geo",
+          "description": "GET /geos/{geoId} — одне GEO (`geoId` з Collection Variables).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Geos] GET /geos/{geoId} — 200 та data-обʼєкт GEO', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Langs",
+      "description": "Мови в контексті GEO (залежить від Site Provider).",
+      "item": [
+        {
+          "name": "Get Lang List",
+          "description": "GET /geos/{geoId}/langs — список мов.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Langs] GET /geos/{geoId}/langs — 200 та data (масив мов)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/langs",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "langs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Casinos",
+      "description": "Казино в розрізі GEO: список, один пост, створення, patch одного та batch.",
+      "item": [
+        {
+          "name": "Get Casino List",
+          "description": "GET /geos/{geoId}/casinos — казино цього GEO.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Casinos] GET list — 200 та data (масив казино)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/casinos",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "casinos"]
+            }
+          }
+        },
+        {
+          "name": "Get Casino",
+          "description": "GET /geos/{geoId}/casinos/{casinoId} — одне казино.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Casinos] GET one — 200 та data з id казино', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/casinos/{{casinoId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "casinos", "{{casinoId}}"]
+            }
+          }
+        },
+        {
+          "name": "Post Casino",
+          "description": "POST /geos/{geoId}/casinos — створити казино.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Casinos] POST — 200 та data (створене казино)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman Test Casino\",\n  \"ref_link\": \"https://example.com/ref\",\n  \"attachment_base64\": null,\n  \"bonuses\": [\n    {\n      \"is_featured_bonus\": true,\n      \"enable_info_popup\": true,\n      \"bonus_title\": [{\"lang\": \"en\", \"title\": \"Welcome Bonus\"}],\n      \"bonus_label\": [{\"lang\": \"en\", \"title\": \"HOT\"}],\n      \"bonus_pros\": [{\"lang\": \"en\", \"title\": \"<p>Great offer</p>\"}],\n      \"bonus_cons\": [{\"lang\": \"en\", \"title\": \"<p>High wagering</p>\"}],\n      \"main_conditions\": {\n        \"bonus\": [{\"lang\": \"en\", \"title\": \"100%\"}],\n        \"minimum_deposit\": [{\"lang\": \"en\", \"title\": \"$10\"}],\n        \"sales_conditions\": [{\"lang\": \"en\", \"title\": \"x35\"}],\n        \"valid_until\": \"31.12.2026\"\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/casinos",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "casinos"]
+            }
+          }
+        },
+        {
+          "name": "Patch Casino List",
+          "description": "PATCH /geos/{geoId}/casinos — batch (підставте реальні id у items).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Casinos] PATCH list — 200 та data (колекція)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"id\": {{casinoId}},\n      \"ref_link\": \"https://example.com/ref\",\n      \"bonuses\": [\n        {\n          \"is_featured_bonus\": false,\n          \"bonus_title\": [{\"lang\": \"en\", \"title\": \"Bonus\"}]\n        }\n      ]\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/casinos",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "casinos"]
+            }
+          }
+        },
+        {
+          "name": "Patch Casino",
+          "description": "PATCH /geos/{geoId}/casinos/{casinoId} — оновити одне казино.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Casinos] PATCH one — 200 та data (оновлене казино)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ref_link\": \"https://example.com/ref\",\n  \"bonuses\": [\n    {\n      \"is_featured_bonus\": true,\n      \"bonus_title\": [{\"lang\": \"en\", \"title\": \"Welcome Bonus\"}],\n      \"main_conditions\": {\n        \"bonus\": [{\"lang\": \"en\", \"title\": \"100%\"}],\n        \"valid_until\": \"31.12.2026\"\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/casinos/{{casinoId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "casinos", "{{casinoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Groups",
+      "description": "Групи контенту для GEO: метадані, елементи списку, додавання, patch казино через групу, видалення зі списку, порядок.",
+      "item": [
+        {
+          "name": "Get Group List",
+          "description": "GET /geos/{geoId}/groups — перелік груп.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] GET list — 200 та data (масив груп)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups"]
+            }
+          }
+        },
+        {
+          "name": "Get Group",
+          "description": "GET /geos/{geoId}/groups/{groupName} — одна група.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] GET one — 200 та data (slug, item_count)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('slug');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Group Entity List",
+          "description": "GET /geos/{geoId}/groups/{groupName}/items — елементи групи.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] GET items — 200 та data (масив сутностей)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/items",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "items"]
+            }
+          }
+        },
+        {
+          "name": "Post Group Entity",
+          "description": "POST /geos/{geoId}/groups/{groupName}/items — додати id у список (реальний id казино в GEO).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] POST item — 200 та data (сутність)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": {{casinoId}},\n  \"type\": \"casino\"\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/items",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "items"]
+            }
+          }
+        },
+        {
+          "name": "Get Group Casino",
+          "description": "GET /geos/{geoId}/groups/{groupName}/casinos/{casinoId}.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] GET casino — 200 та data (казино)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/casinos/{{casinoId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "casinos", "{{casinoId}}"]
+            }
+          }
+        },
+        {
+          "name": "Patch Group Casino",
+          "description": "PATCH /geos/{geoId}/groups/{groupName}/casinos/{casinoId}.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] PATCH casino — 200 та data (казино)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('id');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ref_link\": \"https://example.com/ref\",\n  \"bonuses\": {\n    \"0\": {\n      \"is_featured_bonus\": true,\n      \"bonus_title\": [{\"lang\": \"en\", \"title\": \"Welcome Bonus\"}],\n      \"main_conditions\": {\n        \"bonus\": [{\"lang\": \"en\", \"title\": \"100%\"}],\n        \"valid_until\": \"31.12.2026\"\n      }\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/casinos/{{casinoId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "casinos", "{{casinoId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Group Entity",
+          "description": "DELETE /geos/{geoId}/groups/{groupName}/items/{itemId}.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] DELETE item — 200 та data OK', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/items/{{itemId}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "items", "{{itemId}}"]
+            }
+          }
+        },
+        {
+          "name": "Put Group Entity List Positions",
+          "description": "PUT /geos/{geoId}/groups/{groupName}/items/positions — підставте повний список id з поточного стану групи.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Groups] PUT positions — 200 та data (масив int id)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"positions\": [1, 2, 3]\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/items/positions",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "items", "positions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Site Settings",
+      "description": "Налаштування сайту в контексті GEO + group: список та оновлення link за slug.",
+      "item": [
+        {
+          "name": "Get Site Setting List",
+          "description": "GET /geos/{geoId}/groups/{groupName}/site-settings — список налаштувань (title, slug, link).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[SiteSettings] GET list — 200 та data (масив налаштувань)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/site-settings",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "site-settings"]
+            }
+          }
+        },
+        {
+          "name": "Patch Site Setting",
+          "description": "PATCH /geos/{geoId}/groups/{groupName}/site-settings/{settingSlug} — оновити link для вказаного slug. Body: {\"link\": \"https://.../"}.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[SiteSettings] PATCH — 200 та data з оновленим налаштуванням', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('slug');",
+                  "  pm.expect(body.data).to.have.property('link');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"link\": \"https://example.com/"\n}"
+            },
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/geos/{{geoId}}/groups/{{groupName}}/site-settings/{{settingSlug}}",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "geos", "{{geoId}}", "groups", "{{groupName}}", "site-settings", "{{settingSlug}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Check Status",
+      "description": "Повний знімок усіх казино з ref_link та bonus_title по GEO і групах (casino_positions, betting_positions для pr_seo). Без параметрів у URL.",
+      "item": [
+        {
+          "name": "Get Check Status List",
+          "description": "GET /check-status — масив казино: id, title, attachment, geos[] (id, iso_3166, title, groups.{slug} з ref_link, bonus_title).",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Check Status] GET /check-status — 200 та envelope.data (масив)', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('array');",
+                  "});",
+                  "pm.test('[Check Status] елемент data[0] — id, geos, groups (обʼєкт)', function () {",
+                  "  const body = pm.response.json();",
+                  "  if (!body.data || body.data.length === 0) {",
+                  "    return;",
+                  "  }",
+                  "  const item = body.data[0];",
+                  "  pm.expect(item).to.have.property('id');",
+                  "  pm.expect(item).to.have.property('geos');",
+                  "  pm.expect(item.geos).to.be.an('array');",
+                  "  if (item.geos.length === 0) {",
+                  "    return;",
+                  "  }",
+                  "  const geo = item.geos[0];",
+                  "  pm.expect(geo).to.have.property('iso_3166');",
+                  "  pm.expect(geo).to.have.property('groups');",
+                  "  pm.expect(geo.groups).to.be.an('object');",
+                  "  const groupKeys = Object.keys(geo.groups);",
+                  "  if (groupKeys.length === 0) {",
+                  "    return;",
+                  "  }",
+                  "  const group = geo.groups[groupKeys[0]];",
+                  "  pm.expect(group).to.have.property('ref_link');",
+                  "  pm.expect(group).to.have.property('bonus_title');",
+                  "  pm.expect(group.bonus_title).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/check-status",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "check-status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Simply Static",
+      "description": "Запуск повного експорту через Simply Static (плагін активний, у Simply Static — delivery Local). Див. REST_ROUTES.md.",
+      "item": [
+        {
+          "name": "Generate Simply Static",
+          "description": "POST /generate-simply-static — стартує експорт (type export на боці Simply Static). Тіло запиту не потрібне. Успіх: envelope.data з полями status (200) та опційно message.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('[Simply Static] POST /generate-simply-static — 200 та data.status відповіді SS', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('data');",
+                  "  pm.expect(body.data).to.be.an('object');",
+                  "  pm.expect(body.data).to.have.property('status');",
+                  "  pm.expect(body.data.status).to.eql(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authorization}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/wp-json/tbab/v1/generate-simply-static",
+              "host": ["{{url}}"],
+              "path": ["wp-json", "tbab", "v1", "generate-simply-static"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

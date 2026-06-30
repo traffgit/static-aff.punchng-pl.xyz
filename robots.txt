@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /wp-admin/
+/*?amp=1
+
+Sitemap: https://punchng.com/casino-online/pl/sitemap_index.xml

@@ -1,0 +1,341 @@
+{
+    "key": "group_69d3870093d02",
+    "title": "[Shortcode] Casino mobile speed support",
+    "fields": [
+        {
+            "key": "field_69d3870093d10",
+            "label": "Instruction",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Use shortcode [casino-mobile-speed-support] in post content to display this block.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_69d3870093d11",
+            "label": "Mobile & App",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69d3870093d12",
+            "label": "Points",
+            "name": "cmsms_mobile_app_points",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add point",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69d3870093d13",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "icon-mobile.svg": "icon-mobile.svg",
+                        "icon-document-copy.svg": "icon-document-copy.svg",
+                        "icon-dollar-circle.svg": "icon-dollar-circle.svg",
+                        "icon-clock.svg": "icon-clock.svg",
+                        "icon-game.svg": "icon-game.svg",
+                        "icon-setting.svg": "icon-setting.svg",
+                        "icon-24-support.svg": "icon-24-support.svg",
+                        "icon-sms.svg": "icon-sms.svg",
+                        "icon-call.svg": "icon-call.svg"
+                    },
+                    "default_value": "icon-mobile.svg",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "icon-mobile.svg",
+                    "parent_repeater": "field_69d3870093d12"
+                },
+                {
+                    "key": "field_69d3870093d14",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "qtranslate_text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "translatable",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Full mobile optimization",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69d3870093d12"
+                }
+            ]
+        },
+        {
+            "key": "field_69d3870093d15",
+            "label": "Speed & Performance",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69d3870093d16",
+            "label": "Points",
+            "name": "cmsms_speed_performance_points",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add point",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69d3870093d17",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "icon-mobile.svg": "icon-mobile.svg",
+                        "icon-document-copy.svg": "icon-document-copy.svg",
+                        "icon-dollar-circle.svg": "icon-dollar-circle.svg",
+                        "icon-clock.svg": "icon-clock.svg",
+                        "icon-game.svg": "icon-game.svg",
+                        "icon-setting.svg": "icon-setting.svg",
+                        "icon-24-support.svg": "icon-24-support.svg",
+                        "icon-sms.svg": "icon-sms.svg",
+                        "icon-call.svg": "icon-call.svg"
+                    },
+                    "default_value": "icon-clock.svg",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "icon-clock.svg",
+                    "parent_repeater": "field_69d3870093d16"
+                },
+                {
+                    "key": "field_69d3870093d18",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "qtranslate_text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "translatable",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Fast loading times",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69d3870093d16"
+                }
+            ]
+        },
+        {
+            "key": "field_69d3870093d19",
+            "label": "Customer Support",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69d3870093d1a",
+            "label": "Points",
+            "name": "cmsms_customer_support_points",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add point",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69d3870093d1b",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "icon-mobile.svg": "icon-mobile.svg",
+                        "icon-document-copy.svg": "icon-document-copy.svg",
+                        "icon-dollar-circle.svg": "icon-dollar-circle.svg",
+                        "icon-clock.svg": "icon-clock.svg",
+                        "icon-game.svg": "icon-game.svg",
+                        "icon-setting.svg": "icon-setting.svg",
+                        "icon-24-support.svg": "icon-24-support.svg",
+                        "icon-sms.svg": "icon-sms.svg",
+                        "icon-call.svg": "icon-call.svg"
+                    },
+                    "default_value": "icon-24-support.svg",
+                    "placeholder": "icon-24-support.svg",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "parent_repeater": "field_69d3870093d1a"
+                },
+                {
+                    "key": "field_69d3870093d1c",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "qtranslate_text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "translatable",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "24\/7 Live Chat",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69d3870093d1a"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "casino"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1777996164
+}

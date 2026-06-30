@@ -1,0 +1,12 @@
+{
+  "name": "acf/faq",
+  "title": "Block: FAQ",
+  "description": "",
+  "category": "design",
+  "icon": "update",
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "faq.php"
+  },
+  "align": "full"
+}
